@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     // Save user + encrypted details
-    @PostMapping("/create")
+    @PostMapping("/register")
     public User createUser(@RequestBody User user) {
         CustomerDetails details = user.getCustomerDetails();
         return userService.saveUserWithDetails(user, details);
