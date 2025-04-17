@@ -1,14 +1,10 @@
 package com.adhish.FinSec.Model;
 
 import com.adhish.FinSec.DBCore.converter.AseEncryptor;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
+@Table(name = "customer_details")
 public class CustomerDetails {
 
     @Id
@@ -17,14 +13,13 @@ public class CustomerDetails {
 
     @Convert(converter = AseEncryptor.class)
     private String accountNumber;
-
     @Convert(converter = AseEncryptor.class)
     private String panNumber;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 
     public Long getId() {
         return id;

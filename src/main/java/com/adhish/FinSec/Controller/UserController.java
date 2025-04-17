@@ -1,9 +1,10 @@
 package com.adhish.FinSec.Controller;
 
-import com.adhish.FinSec.Model.CustomerDetails;
+import com.adhish.FinSec.DTO.UserRegistrationRequest;
 import com.adhish.FinSec.Model.User;
 import com.adhish.FinSec.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,9 +18,9 @@ public class UserController {
 
     // Save user + encrypted details
     @PostMapping("/register")
-    public User createUser(@RequestBody User user) {
-        CustomerDetails details = user.getCustomerDetails();
-        return userService.saveUserWithDetails(user, details);
+    public ResponseEntity<User> createUser(@RequestBody UserRegistrationRequest request) {
+        User savedUser = userService.saveUser(request);
+        return ResponseEntity.ok(savedUser);
     }
 
     // Get user with decrypted PAN/account
