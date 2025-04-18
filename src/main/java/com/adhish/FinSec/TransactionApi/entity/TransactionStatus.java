@@ -2,8 +2,8 @@ package com.adhish.FinSec.Enum;
 
 public enum TransactionStatus {
     PENDING,
-    APPROVED,
-    RISKY,
+    APPROVED,    RISKY,
     REJECTED
+
 }
 
