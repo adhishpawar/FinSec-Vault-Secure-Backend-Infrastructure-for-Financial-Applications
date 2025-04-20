@@ -1,6 +1,6 @@
 package com.adhish.FinSec.Repo;
 
-import com.adhish.FinSec.Model.User;
+import com.adhish.FinSec.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,2 +1,6 @@
-package com.adhish.FinSec.TransactionApi.enums;public enum TransactionRiskLevel {
+package com.adhish.FinSec.TransactionApi.enums;
+
+public enum TransactionRiskLevel {
+    NORMAL, RISKY
 }
+

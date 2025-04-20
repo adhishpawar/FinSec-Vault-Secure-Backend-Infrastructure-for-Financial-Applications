@@ -1,4 +1,4 @@
-package com.adhish.FinSec.Model;
+package com.adhish.FinSec.Entity;
 
 import com.adhish.FinSec.DBCore.converter.AseEncryptor;
 import jakarta.persistence.*;

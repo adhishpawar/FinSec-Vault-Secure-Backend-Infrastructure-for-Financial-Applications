@@ -1,7 +1,8 @@
-package com.adhish.FinSec.Model;
+package com.adhish.FinSec.Entity;
 
 import com.adhish.FinSec.Enum.Role;
 import com.adhish.FinSec.Enum.Status;
+import com.adhish.FinSec.TransactionApi.entity.Transaction;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

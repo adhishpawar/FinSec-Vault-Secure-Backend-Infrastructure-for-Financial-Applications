@@ -1,6 +1,6 @@
 package com.adhish.FinSec.CoreSecurity.service;
 
-import com.adhish.FinSec.Model.User;
+import com.adhish.FinSec.Entity.User;
 import com.adhish.FinSec.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

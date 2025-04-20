@@ -83,14 +83,18 @@
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
-			<version>8.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>6.4.4</version>
 		</dependency>
-		<!--		<dependency>-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.36</version>
+        </dependency>
+        <!--		<dependency>-->
 <!--			<groupId>org.springframework.security</groupId>-->
 <!--			<artifactId>spring-security-test</artifactId>-->
 <!--			<scope>test</scope>-->

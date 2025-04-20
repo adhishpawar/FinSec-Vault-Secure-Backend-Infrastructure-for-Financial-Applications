@@ -1,7 +1,7 @@
 package com.adhish.FinSec.Controller;
 
 import com.adhish.FinSec.DTO.UserRegistrationRequest;
-import com.adhish.FinSec.Model.User;
+import com.adhish.FinSec.Entity.User;
 import com.adhish.FinSec.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

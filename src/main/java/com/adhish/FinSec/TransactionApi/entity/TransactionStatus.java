@@ -1,4 +1,4 @@
-package com.adhish.FinSec.Enum;
+package com.adhish.FinSec.TransactionApi.entity;
 
 public enum TransactionStatus {
     PENDING,

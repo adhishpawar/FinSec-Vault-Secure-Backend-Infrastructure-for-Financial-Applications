@@ -1,4 +1,4 @@
-package com.adhish.FinSec.Model;
+package com.adhish.FinSec.Entity;
 
 import jakarta.persistence.*;
 
@@ -16,7 +16,7 @@ public class RefreshToken {
     private Instant expiryDate;
 
     @OneToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id",unique = true)
     private User user;
 
     public Long getId() {

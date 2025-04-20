@@ -49,10 +49,10 @@
                 http
                         .csrf(csrf -> csrf.disable())
                         .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/auth/login","/api/user/**")
+                                .requestMatchers("/auth/**","/api/user/**")
                                 .permitAll()
-//                                .anyRequest()
-//                                .authenticated()
+                                .anyRequest()
+                                .authenticated()
                         )
                         .sessionManagement(session -> session
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

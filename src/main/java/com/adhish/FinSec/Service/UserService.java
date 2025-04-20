@@ -2,8 +2,9 @@ package com.adhish.FinSec.Service;
 
 import com.adhish.FinSec.DTO.UserRegistrationRequest;
 import com.adhish.FinSec.Enum.Role;
-import com.adhish.FinSec.Model.CustomerDetails;
-import com.adhish.FinSec.Model.User;
+import com.adhish.FinSec.Enum.Status;
+import com.adhish.FinSec.Entity.CustomerDetails;
+import com.adhish.FinSec.Entity.User;
 import com.adhish.FinSec.Repo.CustomerDetailsRepository;
 import com.adhish.FinSec.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private OtpService otpService;
+
     public User saveUser(UserRegistrationRequest request){
         User user = new User();
         user.setName(request.getName());
@@ -29,7 +33,7 @@ public class UserService {
         user.setPhoneNumber(request.getPhoneNumber());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
-        user.setStatus(request.getStatus());
+        user.setStatus(Status.INACTIVE);
 
         User savedUser = userRepository.save(user);
 
@@ -47,6 +51,7 @@ public class UserService {
             customerDetailsRepository.save(details);
         }
 
+        otpService.generateOtp(savedUser);
         return savedUser;
     }
 
