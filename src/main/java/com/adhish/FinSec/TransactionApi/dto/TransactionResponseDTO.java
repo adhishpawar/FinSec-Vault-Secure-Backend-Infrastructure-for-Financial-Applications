@@ -1,37 +1,33 @@
-package com.adhish.FinSec.TransactionApi.entity;
+package com.adhish.FinSec.TransactionApi.dto;
 
-import com.adhish.FinSec.Entity.User;
 import com.adhish.FinSec.TransactionApi.enums.TransactionRiskLevel;
 import com.adhish.FinSec.TransactionApi.enums.TransactionStatus;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-public class Transaction {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TransactionResponseDTO {
     private Long id;
-
     private String fromAccount;
     private String toAccount;
     private Double amount;
     private boolean isForeign;
-
-    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
-
-    @Enumerated(EnumType.STRING)
     private TransactionRiskLevel riskLevel;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "initiated_by")
-    @JsonIgnoreProperties({"otps", "password", "phoneNumber"}) // prevent recursion
-    private User initiatedBy;
-
+    private String initiatedByEmail;
+    private String initiatedByName;
     private LocalDateTime initiatedAt;
+
+
+
+
+
+
+
+
+
+
+    //Setters and Getters
+
 
     public Long getId() {
         return id;
@@ -89,12 +85,20 @@ public class Transaction {
         this.riskLevel = riskLevel;
     }
 
-    public User getInitiatedBy() {
-        return initiatedBy;
+    public String getInitiatedByEmail() {
+        return initiatedByEmail;
     }
 
-    public void setInitiatedBy(User initiatedBy) {
-        this.initiatedBy = initiatedBy;
+    public void setInitiatedByEmail(String initiatedByEmail) {
+        this.initiatedByEmail = initiatedByEmail;
+    }
+
+    public String getInitiatedByName() {
+        return initiatedByName;
+    }
+
+    public void setInitiatedByName(String initiatedByName) {
+        this.initiatedByName = initiatedByName;
     }
 
     public LocalDateTime getInitiatedAt() {
@@ -103,18 +107,5 @@ public class Transaction {
 
     public void setInitiatedAt(LocalDateTime initiatedAt) {
         this.initiatedAt = initiatedAt;
-    }
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

@@ -1,7 +1,7 @@
 package com.adhish.FinSec.TransactionApi.repository;
 
 import com.adhish.FinSec.TransactionApi.entity.Transaction;
-import com.adhish.FinSec.TransactionApi.entity.TransactionStatus;
+import com.adhish.FinSec.TransactionApi.enums.TransactionStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

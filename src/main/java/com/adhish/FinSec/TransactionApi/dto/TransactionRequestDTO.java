@@ -1,11 +1,14 @@
 package com.adhish.FinSec.TransactionApi.dto;
 
-public class TransactionRequest {
+public class TransactionRequestDTO {
     private String fromAccount;
     private String toAccount;
     private Double amount;
     private boolean isForeign;
 
+
+
+    //Getters and Setters
     public String getFromAccount() {
         return fromAccount;
     }

@@ -44,23 +44,33 @@
                 return new BCryptPasswordEncoder(12); // Strength can be tuned
             }
 
-            @Bean
-            public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
-                http
-                        .csrf(csrf -> csrf.disable())
-                        .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/auth/**","/api/user/**")
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated()
-                        )
-                        .sessionManagement(session -> session
-                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                        )
-                        .authenticationProvider(authProvider())
-                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            http
+                    .csrf(csrf -> csrf.disable())
+                    .authorizeHttpRequests(auth -> auth
+                            // Allow auth endpoints to everyone
+                            .requestMatchers("/auth/**", "/api/user/**").permitAll()
 
-                return http.build();
-            }
+                            // Restrict /audit to MANAGER and TELLER
+                            .requestMatchers("/audit/**").hasAnyRole("MANAGER", "TELLER")
+
+                            // Allow only CUSTOMERS to do transaction operations
+//                            .requestMatchers("/transaction/**").hasRole("")
+
+                            .requestMatchers("/transaction/approve/**").hasAnyRole("MANAGER", "TELLER","CUSTOMER")
+
+                            // Everything else requires authentication
+                            .anyRequest().authenticated()
+                    )
+                    .sessionManagement(session -> session
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    )
+                    .authenticationProvider(authProvider())
+                    .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+            return http.build();
+        }
+
 
     }

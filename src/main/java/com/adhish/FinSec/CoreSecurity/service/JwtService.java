@@ -1,11 +1,14 @@
 package com.adhish.FinSec.CoreSecurity.service;
 
 
+import com.adhish.FinSec.Repo.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +16,20 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Service
 public class JwtService {
 
     private final String secretKey;
+
+    @Autowired
+    private MyUserDetailsService userDetailsService;  // ✅ CORRECT
+    @Autowired
+    private UserRepository userRepository;
 
     public JwtService(){
         secretKey = generateSecretKey();
@@ -42,12 +48,25 @@ public class JwtService {
 
     // Method to generate a JWT token
     public String generateToken(String username) {
+
+        // Get role from userDetails
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+
+        List<String> roles = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+
+        //Claims
         Map<String, Object> claims = new HashMap<>();
+        claims.put("authorities", roles);
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 3))  // token expiration in 3 minutes
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))  // token expiration in 3 minutes
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -74,7 +93,9 @@ public class JwtService {
     public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
-                .build().parseClaimsJws(token).getBody();
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     // Method to validate the token
@@ -85,7 +106,9 @@ public class JwtService {
 
     // Method to check if the token has expired
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        Claims claims = extractAllClaims(token);
+        Date expirationDate = claims.getExpiration();
+        return expirationDate.before(new Date());
     }
 
     // Method to extract expiration date from the token
