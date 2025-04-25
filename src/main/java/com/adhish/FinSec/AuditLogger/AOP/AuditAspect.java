@@ -1,8 +1,8 @@
-package com.adhish.FinSec.AOP;
+package com.adhish.FinSec.AuditLogger.AOP;
 
-import com.adhish.FinSec.Entity.AuditLog;
+import com.adhish.FinSec.AuditLogger.entity.AuditLog;
 import com.adhish.FinSec.Entity.User;
-import com.adhish.FinSec.Repo.AuditLogRepository;
+import com.adhish.FinSec.AuditLogger.Repo.AuditLogRepository;
 import com.adhish.FinSec.Repo.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;

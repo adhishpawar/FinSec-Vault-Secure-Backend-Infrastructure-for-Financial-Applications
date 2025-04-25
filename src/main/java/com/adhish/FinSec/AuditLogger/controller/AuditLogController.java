@@ -1,7 +1,7 @@
-package com.adhish.FinSec.Controller;
+package com.adhish.FinSec.AuditLogger.controller;
 
-import com.adhish.FinSec.Entity.AuditLog;
-import com.adhish.FinSec.Repo.AuditLogRepository;
+import com.adhish.FinSec.AuditLogger.entity.AuditLog;
+import com.adhish.FinSec.AuditLogger.Repo.AuditLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,5 +1,6 @@
-package com.adhish.FinSec.Entity;
+package com.adhish.FinSec.AuditLogger.entity;
 
+import com.adhish.FinSec.Entity.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

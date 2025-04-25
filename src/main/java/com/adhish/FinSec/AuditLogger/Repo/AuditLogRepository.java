@@ -1,6 +1,6 @@
-package com.adhish.FinSec.Repo;
+package com.adhish.FinSec.AuditLogger.Repo;
 
-import com.adhish.FinSec.Entity.AuditLog;
+import com.adhish.FinSec.AuditLogger.entity.AuditLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuditLogRepository extends JpaRepository<AuditLog,Long> {
