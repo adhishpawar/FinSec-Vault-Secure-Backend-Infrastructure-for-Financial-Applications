@@ -16,6 +16,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String username; // For system login (MUST be unique)
+
     private String name;
 
     @Column(unique = true)
@@ -132,5 +136,21 @@ public class User {
 
     public void setLogs(List<AuditLog> logs) {
         this.logs = logs;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public CustomerDetails getCustomerDetails() {
+        return customerDetails;
+    }
+
+    public void setCustomerDetails(CustomerDetails customerDetails) {
+        this.customerDetails = customerDetails;
     }
 }
