@@ -1,6 +1,6 @@
 package com.adhish.FinSec.Entity;
 
-import com.adhish.FinSec.AuditLogger.entity.AuditLog;
+
 import com.adhish.FinSec.Enum.Role;
 import com.adhish.FinSec.Enum.Status;
 import com.adhish.FinSec.TransactionApi.entity.Transaction;
@@ -43,8 +43,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<AuditLog> logs;
+
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CustomerDetails customerDetails;
@@ -130,13 +129,9 @@ public class User {
         this.transactions = transactions;
     }
 
-    public List<AuditLog> getLogs() {
-        return logs;
-    }
 
-    public void setLogs(List<AuditLog> logs) {
-        this.logs = logs;
-    }
+
+
 
     public String getUsername() {
         return username;
